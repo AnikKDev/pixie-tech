@@ -30,7 +30,7 @@ const searchResult = phones => {
                         <p class="card-text"><span class="brand-span">Brand:</span> ${element.brand}</p>
                     </div>
                     <div class="d-flex mt-3">
-                        <button id="details-button" href="#" class="btn btn-primary">Details</button>
+                        <button onclick="seeDetails('${element.slug}')" id="details-button" href="#" class="btn btn-primary">Details</button>
                     </div>
                 </div>
             </div>
@@ -38,4 +38,59 @@ const searchResult = phones => {
             searchResult.appendChild(div);
         });
     }
+}
+
+// details button
+const seeDetails = details => {
+    // console.log(details)
+    const url = `https://openapi.programming-hero.com/api/phone/${details}`;
+    fetch(url)
+        .then(res => res.json())
+        .then(data => viewDetails(data.data))
+
+}
+const releaseDateCheck = (date) => {
+    if (date == null || date == '') {
+        return 'Release date not found';
+    }
+    else {
+        return date;
+    }
+}
+
+const getSensors = (sensor) => {
+    let sensors = [];
+
+    sensor.forEach(element => {
+        sensors.push(element);
+    });
+    return sensors;
+}
+const viewDetails = details => {
+    const detailContainer = document.getElementById('detail-container');
+    console.log(details);
+    const div = document.createElement('div');
+    div.innerHTML = `
+    <div class="card p-4" style="width: 18rem;">
+        <img src="${details.image}" class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">${details.name}</h5>
+            <p class="card-text text-muted" id="release-date">${releaseDateCheck(details.releaseDate)}.</p>
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item"><span class="fw-bold">Memory:</span> ${details.mainFeatures.memory}.</li>
+            <li class="list-group-item"><span class="fw-bold">Display-size:</span> ${details.mainFeatures.displaySize}.</li>
+            <li class="list-group-item"><span class="fw-bold">Chipset:</span> ${details.mainFeatures.chipSet}.</li>
+            <li class="list-group-item"><span class="fw-bold">Sensors:</span> ${getSensors(details.mainFeatures.sensors)}.</li>
+        </ul>
+        <div class="card-body">
+            <a href="#" class="card-link">Card link</a>
+            <a href="#" class="card-link">Another link</a>
+        </div>
+    </div>
+    `
+
+    detailContainer.appendChild(div);
+
+
 }
