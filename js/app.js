@@ -1,7 +1,9 @@
 const searchPhone = () => {
+    document.getElementById('search-result').innerHTML = '';
     const searchInput = document.getElementById('search-input');
     const searchInputValue = searchInput.value;
     const url = `https://openapi.programming-hero.com/api/phones?search=${searchInputValue}`;
+    document.getElementById('spinner').style.display = 'block';
     fetch(url)
         .then(res => res.json())
         .then(data => searchResult(data.data))
@@ -9,6 +11,7 @@ const searchPhone = () => {
 }
 
 const searchResult = phones => {
+    document.getElementById('spinner').style.display = 'none';
     if (phones.length == 0) {
         console.log('error')
         document.getElementById('warning').innerText = 'Please try again :)';
@@ -68,10 +71,10 @@ const getSensors = (sensor) => {
 }
 const viewDetails = details => {
     const detailContainer = document.getElementById('detail-container');
-    console.log(details);
+    detailContainer.innerHTML = '';
     const div = document.createElement('div');
     div.innerHTML = `
-    <div class="card p-4" style="width: 18rem;">
+    <div class="card detailed-card p-4 mt-5 shadow" style="width: 18rem;">
         <img src="${details.image}" class="card-img-top" alt="...">
         <div class="card-body">
             <h5 class="card-title">${details.name}</h5>
