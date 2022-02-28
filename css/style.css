@@ -1,4 +1,33 @@
 body{
-    background-image: linear-gradient(120deg, #fffcf6, #ebca70);
+    background-image: linear-gradient(160deg, #fffcf6, #f3d992);
+    background-repeat: no-repeat;
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+    background-position: left top;
+    min-height: 100vh;
+}
+#search-input{
+    width: 20px;
+    height: 50px;
+}
+#search-button{
+font-size: 1.1em;
+font-weight: bold;
+transition: 0.2s;
+}
+#details-button{
+    font-size: 1.2em;
+}
+.each-card{
+    border-radius: 12px;
+    background-color: #fffbf1c4;
+    transition: 0.5s;
 
+}
+.each-card:hover{
+    transform: scale3d(1.07, 1.07, 1.07);
+}
+.brand-span{
+    font-weight: bold;
+    font-style: italic;
 }

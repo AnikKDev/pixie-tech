@@ -19,6 +19,24 @@
         <h5 class="m-0 pb-4"><u>Your very own smartphone alliance</u></h5>
     </header>
     <main>
+        <section>
+            <!-- search input box -->
+            <div class="input-group m-4 w-50 container mx-auto">
+                <input id="search-input" type="text" class="form-control" placeholder="Search"
+                    aria-label="Recipient's username" aria-describedby="button-addon2">
+                <button onclick="searchPhone()" class="btn btn-outline-secondary" type="button"
+                    id="search-button">Search</button>
+            </div>
+        </section>
+        <!-- warning message -->
+        <h4 class="text-danger text-center fw-bold" id="warning"></h4>
+
+        <!-- search result -->
+        <section>
+            <div id="search-result" class="row container mx-auto">
+
+            </div>
+        </section>
 
     </main>
 
