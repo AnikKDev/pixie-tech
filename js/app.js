@@ -1,9 +1,13 @@
+// search event function
 const searchPhone = () => {
     document.getElementById('search-result').innerHTML = '';
+    document.getElementById("detail-container").innerHTML = '';
     const searchInput = document.getElementById('search-input');
     const searchInputValue = searchInput.value;
     const url = `https://openapi.programming-hero.com/api/phones?search=${searchInputValue}`;
+    // input value empty or not
     if (searchInput.value === '') {
+        document.getElementById("search-result-count").innerText = '';
         document.getElementById("warning").innerText = "Input-field can't be empty. Try again :("
     }
     else {
@@ -14,28 +18,31 @@ const searchPhone = () => {
         searchInput.value = '';
     }
 }
-
+// search result
 const searchResult = phones => {
-    console.log(phones.length)
     const slicing = phones.slice(0, 20);
     document.getElementById('spinner').style.display = 'none';
     if (phones.length == 0) {
-        document.getElementById("search-result-count").innerText = `${phones.length} result found`;
+        // result count
+        document.getElementById("search-result-count").innerText = `Showing Results: ${slicing.length}, Result found: ${phones.length}.`;
         document.getElementById("search-result-count").style.color = "red";
-        console.log('error')
+        // if search result can't be found
         document.getElementById('warning').innerText = 'Please try again :(';
     }
     else {
+        // result count
         if (phones.length > 1) {
-            document.getElementById("search-result-count").innerText = `${phones.length} results found`;
+            document.getElementById("search-result-count").innerText = `Showing Results: ${slicing.length}, Result found: ${phones.length}.`;
         }
         else {
-            document.getElementById("search-result-count").innerText = `${phones.length} result found`;
+            document.getElementById("search-result-count").innerText = `Showing Result: ${slicing.length}, Result found: ${phones.length}.`;
         }
         document.getElementById("search-result-count").style.color = "green";
+        // clearing waring message
         document.getElementById('warning').innerText = '';
         const searchResult = document.getElementById('search-result');
         slicing.forEach(element => {
+            // dynamic div with its childrens
             const div = document.createElement('div');
             div.className = 'col-md-4 d-flex justify-content-center my-5';
             div.innerHTML = `
@@ -61,13 +68,17 @@ const searchResult = phones => {
 
 // details button
 const seeDetails = details => {
-    // console.log(details)
+    // get api of product details
     const url = `https://openapi.programming-hero.com/api/phone/${details}`;
     fetch(url)
         .then(res => res.json())
         .then(data => viewDetails(data.data))
 
 }
+
+// functional approaches
+
+// check if there is a release date or not
 const releaseDateCheck = (date) => {
     if (date == null || date == '') {
         return 'Release date not found';
@@ -76,7 +87,7 @@ const releaseDateCheck = (date) => {
         return date;
     }
 }
-
+// get the sensor data
 const getSensors = (sensor) => {
     let sensors = [];
 
@@ -85,6 +96,7 @@ const getSensors = (sensor) => {
     });
     return sensors;
 }
+// get the other feature data of product
 const checkOthers = others => {
     if (others == '' || others == undefined) {
         return 'No';
@@ -93,6 +105,8 @@ const checkOthers = others => {
         return others;
     }
 }
+
+// detailed card of a selected product
 const viewDetails = details => {
     console.log(details.data)
     const detailContainer = document.getElementById('detail-container');
@@ -119,8 +133,8 @@ const viewDetails = details => {
         </ul>
     </div>
     `
-
     detailContainer.appendChild(div);
-
-
 }
+
+
+// end

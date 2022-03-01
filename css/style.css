@@ -1,3 +1,4 @@
+/* body */
 body{
     background-image: linear-gradient(90deg, #fffcf6, #f3d992);
     background-repeat: no-repeat;
@@ -6,6 +7,12 @@ body{
     background-position: left top;
     min-height: 100vh;
 }
+/* spinner */
+#spinner{
+    display: none;
+}
+
+/* search input box */
 #search-input{
     width: 20px;
     height: 50px;
@@ -15,33 +22,35 @@ font-size: 1.1em;
 font-weight: bold;
 transition: 0.2s;
 }
-#details-button{
-    font-size: 1.2em;
+#search-result-count{
+    font-size: 19px;
+    font-style: italic;
 }
+
+
+
+/* search result */
 .each-card{
     border-radius: 12px;
     background-color: #fffbf1c4;
     transition: 0.5s;
 }
+.each-card:hover{
+    transform: scale3d(1.07, 1.07, 1.07);
+}
+#details-button{
+    font-size: 1.2em;
+}
+/* selected details */
 .detailed-card{
     border-radius: 12px;
     background-color: #fffbf1c4;
     transition: 0.5s;
     width: 90%;
 }
-.each-card:hover{
-    transform: scale3d(1.07, 1.07, 1.07);
-}
 .brand-span{
     font-weight: bold;
     font-style: italic;
 }
 
-#spinner{
-    display: none;
-}
-
-#search-result-count{
-    font-size: 19px;
-    font-style: italic;
-}
+/* end */
