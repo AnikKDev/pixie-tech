@@ -17,6 +17,7 @@ const searchPhone = () => {
 
 const searchResult = phones => {
     console.log(phones.length)
+    const slicing = phones.slice(0, 20);
     document.getElementById('spinner').style.display = 'none';
     if (phones.length == 0) {
         document.getElementById("search-result-count").innerText = `${phones.length} result found`;
@@ -34,7 +35,7 @@ const searchResult = phones => {
         document.getElementById("search-result-count").style.color = "green";
         document.getElementById('warning').innerText = '';
         const searchResult = document.getElementById('search-result');
-        phones.forEach(element => {
+        slicing.forEach(element => {
             const div = document.createElement('div');
             div.className = 'col-md-4 d-flex justify-content-center my-5';
             div.innerHTML = `
@@ -48,7 +49,7 @@ const searchResult = phones => {
                         <p class="card-text"><span class="brand-span">Brand:</span> ${element.brand}</p>
                     </div>
                     <div class="d-flex mt-3">
-                        <button onclick="seeDetails('${element.slug}')" id="details-button" href="#" class="btn btn-primary">Details</button>
+                        <a onclick="seeDetails('${element.slug}')" id="details-button" href="#" class="btn btn-primary">Details</a>
                     </div>
                 </div>
             </div>
@@ -84,12 +85,21 @@ const getSensors = (sensor) => {
     });
     return sensors;
 }
+const checkOthers = others => {
+    if (others == '' || others == undefined) {
+        return 'No';
+    }
+    else {
+        return others;
+    }
+}
 const viewDetails = details => {
+    console.log(details.data)
     const detailContainer = document.getElementById('detail-container');
     detailContainer.innerHTML = '';
     const div = document.createElement('div');
     div.innerHTML = `
-    <div class="card detailed-card p-4 mt-5 shadow" style="width: 18rem;">
+    <div class="card detailed-card p-4 mt-5 shadow" style="width: 20rem;">
         <img src="${details.image}" class="card-img-top" alt="...">
         <div class="card-body">
             <h5 class="card-title">${details.name}</h5>
@@ -100,11 +110,13 @@ const viewDetails = details => {
             <li class="list-group-item"><span class="fw-bold">Display-size:</span> ${details.mainFeatures.displaySize}.</li>
             <li class="list-group-item"><span class="fw-bold">Chipset:</span> ${details.mainFeatures.chipSet}.</li>
             <li class="list-group-item"><span class="fw-bold">Sensors:</span> ${getSensors(details.mainFeatures.sensors)}.</li>
+            <li class="list-group-item"><span class="fw-bold">Bluetooth:</span> ${checkOthers(details?.others?.Bluetooth)}.</li>
+            <li class="list-group-item"><span class="fw-bold">GPS:</span> ${checkOthers(details?.others?.GPS)}.</li>
+            <li class="list-group-item"><span class="fw-bold">Bluetooth:</span> ${checkOthers(details?.others?.NFC)}.</li>
+            <li class="list-group-item"><span class="fw-bold">Radio:</span> ${checkOthers(details?.others?.Radio)}.</li>
+            <li class="list-group-item"><span class="fw-bold">USB:</span> ${checkOthers(details?.others?.USB)}.</li>
+            <li class="list-group-item"><span class="fw-bold">WLAN:</span> ${checkOthers(details?.others?.WLAN)}.</li>
         </ul>
-        <div class="card-body">
-            <a href="#" class="card-link">Card link</a>
-            <a href="#" class="card-link">Another link</a>
-        </div>
     </div>
     `
 
