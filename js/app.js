@@ -105,6 +105,14 @@ const checkOthers = others => {
         return others;
     }
 }
+const checkMainFeatures = features => {
+    if (features == '' || features == undefined) {
+        return 'No';
+    }
+    else {
+        return features;
+    }
+}
 
 // detailed card of a selected product
 const viewDetails = details => {
@@ -120,10 +128,10 @@ const viewDetails = details => {
             <p class="card-text text-muted" id="release-date">${releaseDateCheck(details.releaseDate)}.</p>
         </div>
         <ul class="list-group list-group-flush">
-            <li class="list-group-item"><span class="fw-bold">Memory:</span> ${details.mainFeatures.memory}.</li>
-            <li class="list-group-item"><span class="fw-bold">Display-size:</span> ${details.mainFeatures.displaySize}.</li>
-            <li class="list-group-item"><span class="fw-bold">Chipset:</span> ${details.mainFeatures.chipSet}.</li>
-            <li class="list-group-item"><span class="fw-bold">Sensors:</span> ${getSensors(details.mainFeatures.sensors)}.</li>
+            <li class="list-group-item"><span class="fw-bold">Memory:</span> ${checkMainFeatures(details?.mainFeatures?.memory)}.</li>
+            <li class="list-group-item"><span class="fw-bold">Display-size:</span> ${checkMainFeatures(details?.mainFeatures?.displaySize)}.</li>
+            <li class="list-group-item"><span class="fw-bold">Chipset:</span> ${checkMainFeatures(details?.mainFeatures?.chipSet)}.</li>
+            <li class="list-group-item"><span class="fw-bold">Sensors:</span> ${getSensors(details?.mainFeatures?.sensors)}.</li>
             <li class="list-group-item"><span class="fw-bold">Bluetooth:</span> ${checkOthers(details?.others?.Bluetooth)}.</li>
             <li class="list-group-item"><span class="fw-bold">GPS:</span> ${checkOthers(details?.others?.GPS)}.</li>
             <li class="list-group-item"><span class="fw-bold">Bluetooth:</span> ${checkOthers(details?.others?.NFC)}.</li>
