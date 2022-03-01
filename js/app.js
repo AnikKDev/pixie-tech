@@ -3,20 +3,35 @@ const searchPhone = () => {
     const searchInput = document.getElementById('search-input');
     const searchInputValue = searchInput.value;
     const url = `https://openapi.programming-hero.com/api/phones?search=${searchInputValue}`;
-    document.getElementById('spinner').style.display = 'block';
-    fetch(url)
-        .then(res => res.json())
-        .then(data => searchResult(data.data))
-    searchInput.value = '';
+    if (searchInput.value === '') {
+        document.getElementById("warning").innerText = "Input-field can't be empty. Try again :("
+    }
+    else {
+        document.getElementById('spinner').style.display = 'block';
+        fetch(url)
+            .then(res => res.json())
+            .then(data => searchResult(data.data))
+        searchInput.value = '';
+    }
 }
 
 const searchResult = phones => {
+    console.log(phones.length)
     document.getElementById('spinner').style.display = 'none';
     if (phones.length == 0) {
+        document.getElementById("search-result-count").innerText = `${phones.length} result found`;
+        document.getElementById("search-result-count").style.color = "red";
         console.log('error')
-        document.getElementById('warning').innerText = 'Please try again :)';
+        document.getElementById('warning').innerText = 'Please try again :(';
     }
     else {
+        if (phones.length > 1) {
+            document.getElementById("search-result-count").innerText = `${phones.length} results found`;
+        }
+        else {
+            document.getElementById("search-result-count").innerText = `${phones.length} result found`;
+        }
+        document.getElementById("search-result-count").style.color = "green";
         document.getElementById('warning').innerText = '';
         const searchResult = document.getElementById('search-result');
         phones.forEach(element => {

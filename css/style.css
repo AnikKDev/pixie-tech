@@ -39,3 +39,8 @@ transition: 0.2s;
 #spinner{
     display: none;
 }
+
+#search-result-count{
+    font-size: 19px;
+    font-style: italic;
+}
